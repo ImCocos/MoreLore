@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main_grid_title">
+    Add new post:
+</div>
+<div class="main_grid_content">
+    <form method="post">
+        <label>
+            Title of your post:
+            <br>
+            <input class="reg-areas" placeholder="Title" name="title" required>
+        </label>
+        <br>
+        <label>
+            Text for your post:
+            <br>
+            <textarea class="post-areas" placeholder="Text" name="content" required></textarea>
+        </label>
+        <br>
+        <button type="submit" class="reg-button">Post</button>
+    </form>
+    <br>
+    <b class="flash">{{get_flashed_messages()[0]}}</b>
+</div>
+
+{% endblock %}

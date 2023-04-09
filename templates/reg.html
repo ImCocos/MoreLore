@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main_grid_title">
+    Registration:
+</div>
+<div class="main_grid_content">
+
+    <form action="/reg" method="POST">
+        <label>
+            <input class="reg-areas" type="text" placeholder="Name" name="name" type="username" required>
+        </label>
+        <br>
+        <br>
+        <label>
+            <input class="reg-areas" type="text" placeholder="Password" name="psw" type="password" required>
+        </label>
+        <br>
+        <br>
+        <button type="submit" class="reg-button">Create account</button>
+    </form>
+    <br>
+    Already have an account?
+    <a href="/auth" class="visible">Authorize</a>
+    <br>
+    <b class="flash">{{get_flashed_messages()[0]}}</b>
+</div>
+
+{% endblock %}

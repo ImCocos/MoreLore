@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="main_grid_title">
+    Posts by "<a href="/{{name}}/profile" class="visible">{{name}}</a>":
+</div>
+
+<div class="main_grid_content">
+    {% for item in range(0, postsCount) %}
+    <div class="post">
+        <div class="post-item">
+            <markup style="font-size: 80%; color: grey;">Title:</markup>
+            <br>
+            <tit style="font-size: 150%">{{titles[item][0]}}</tit>
+            <br>
+            <markup style="font-size: 80%; color: grey;">Text:</markup>
+            <br>
+            {{contents[item][0]}}
+            {% if name == username: %}
+            <br>
+            <br>
+            <a href="/deletepost/{{name}}:{{titles[item][0]}}" class="delete">Delete post</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="main_grid_hotbar">
+    Author: <a href="/{{name}}/profile" class="visible">{{name}}</a> | Rating: <rating class="rating">soon</rating>
+    <br>
+    Posts have: {{postsCount}}
+    <br>
+    <a href="/{{name}}/profile" class="visible"><img src=" {{ url_for('static', filename='media/avatars') }}/{{avatarPath}} " height="150px" width="150px" style="border-radius: 50%; border: 2px solid #2e2e2f;"></a>
+</div>
+
+{% endblock %}

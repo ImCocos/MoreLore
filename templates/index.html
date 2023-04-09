@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="main_grid_title">
+    Users:
+</div>
+
+<div class="main_grid_content">
+    {% for count in range(0, usersCount) %}
+    <div class="post">
+        <div class="post-item">
+            <markup style="font-size: 80%; color: grey;">Name:</markup>
+            <br>
+            <tit style="font-size: 150%"><a href="/{{usernames[count][0]}}/profile" class="visible">{{usernames[count][0]}}</a></tit>
+            <br>
+            <markup style="font-size: 80%; color: grey;">Avatar:</markup>
+            <br>
+            <a href="/{{usernames[count][0]}}/profile" class="visible">
+                <img src=" {{ url_for('static', filename='media/avatars') }}/{{avatarPaths[count][0]}} " height="150px" width="150px" style="border-radius: 50%; border: 2px solid #2e2e2f;">
+            </a>
+            <br>
+            <markup style="font-size: 80%; color: grey;">Have posts:</markup>
+            <a href="/{{usernames[count][0]}}/posts" class="visible">({{countOfPosts[count][0]}})</a>
+            <br>
+            <markup>Rating:</markup>
+            <rating class="rating">soon</rating>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+{% endblock %}

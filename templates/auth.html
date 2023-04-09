@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main_grid_title">
+    Authorization:
+</div>
+<div class="main_grid_content">
+
+    <form action="/auth" method="POST">
+        <label>
+            <input class="reg-areas" type="text" placeholder="Name" name="name" type="username" required>
+        </label>
+        <br>
+        <br>
+        <label>
+            <input class="reg-areas" type="text" placeholder="Password" name="psw" type="password" required>
+        </label>
+        <br>
+        <br>
+        <button type="submit" class="reg-button">Authorize</button>
+    </form>
+    <br>
+    Yet haven't account? <a href="/reg" class="visible">Registrate</a>
+    <br>
+
+    <b class="flash">{{get_flashed_messages()[0]}}</b>
+</div>
+
+{% endblock %}

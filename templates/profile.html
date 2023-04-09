@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main_grid_title">
+    {{name}}:
+</div>
+<div class="main_grid_content">
+    <img src=" {{ url_for('static', filename='media/avatars') }}/{{avatarPath}} " height="200px" width="200px" style="border-radius: 50%; border: 2px solid #2e2e2f;">
+    <br>
+    <b>{{name}}</b>
+    <br>
+    <a href="/{{name}}/posts" class="visible">Posts({{countOfPosts}})</a>
+</div>
+
+{% endblock %}

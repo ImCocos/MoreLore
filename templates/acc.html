@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main_grid_title">
+    Account:
+</div>
+<div class="main_grid_content">
+    <img src=" {{ url_for('static', filename='media/avatars') }}/{{avatarPath}} " height="200px" width="200px" style="border-radius: 50%; border: 2px solid #2e2e2f;">
+    <br>
+    <b>{{name}}</b>
+    <br>
+    <a href="/{{name}}/posts" class="visible">Posts({{countOfPosts}})</a>
+    <br>
+    <br>
+    Load avatar from <a href="http://github.com" class="visible">GitHub</a>
+    <form method="POST">
+        <label>
+            <input class="reg-areas" name="git-url" type="url" placeholder="GitHub-link">
+        </label>
+        <button type="submit" class="reg-button">Load</button>
+    </form>
+    <br>
+    <a href="/acc/{{name}}/add-post" class="visible">Add post</a>
+    <br>
+    <a href="/logout" class="visible">Log Out</a>
+    <br>
+    <b class="flash">{{get_flashed_messages()[0]}}</b>
+</div>
+
+{% endblock %}
