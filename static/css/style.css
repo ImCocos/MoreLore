@@ -19,6 +19,7 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 z-index: 99;
+
 }
 
 .logo {
@@ -57,13 +58,13 @@ transform: scaleX(1);
 .main-grid {
 display: grid;
 gap: 10px 10px;
-grid-template-columns: 9fr 1fr;
+grid-template-columns: 90% 10%;
 grid-template-rows: auto auto;
 grid-template-columns: 80% 20%;
 grid-template-areas:
 "title title"
 "content hotbar";
-
+margin-bottom: 13px;
 }
 
 .main_grid_title {
@@ -72,7 +73,8 @@ border-radius: 12px;
 background-color: #CCCCCC;
 padding: 13px 13px;
 grid-area: title;
-margin: 10px 10px;
+margin-right: 13px;
+margin-left: 13px;
 }
 
 .main_grid_content {
@@ -83,7 +85,7 @@ padding: 13px 13px;
 font-size: 150%;
 text-align: left;
 grid-area: content;
-margin: 10px 10px;
+margin-left: 13px;
 }
 
 .main_grid_hotbar {
@@ -94,8 +96,23 @@ padding: 13px 13px;
 font-size: 150%;
 text-align: left;
 grid-area: hotbar;
-margin: 10px 10px;
+padding: 26px 26px;
+}
 
+.main_grid_hotbar_logo {
+border-radius: 50%;
+border: 2px solid #2e2e2f;
+width: 100%;
+margin: auto;
+}
+
+.main_grid_hotbar_logo_outline {
+display: flex;
+background: #BBBBBB;
+border-radius: 10%;
+align-items: center;
+margin: 0;
+padding: 5%;
 }
 
 input.reg-areas {

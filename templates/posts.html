@@ -29,11 +29,23 @@
 </div>
 
 <div class="main_grid_hotbar">
-    Author: <a href="/{{name}}/profile" class="visible">{{name}}</a> | Rating: <rating class="rating">soon</rating>
+    <markup>Author:</markup>
     <br>
-    Posts have: {{postsCount}}
+    <a href="/{{name}}/profile" class="visible">{{name}}</a>
     <br>
-    <a href="/{{name}}/profile" class="visible"><img src=" {{ url_for('static', filename='media/avatars') }}/{{avatarPath}} " height="150px" width="150px" style="border-radius: 50%; border: 2px solid #2e2e2f;"></a>
+    <markup>Rating:</markup>
+    <br>
+    <rating class="rating">soon</rating>
+    <br>
+    <markup>Posts count:</markup>
+    <br>
+    ({{postsCount}})
+    <br>
+    <markup>Avatar:</markup>
+    <br>
+    <div class="main_grid_hotbar_logo_outline">
+        <a href="/{{name}}/profile" class="visible"><img src=" {{ url_for('static', filename='media/avatars') }}/{{avatarPath}} " class="main_grid_hotbar_logo"></a>
+    </div>
 </div>
 
 {% endblock %}

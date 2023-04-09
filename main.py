@@ -20,6 +20,7 @@ def createUsersDb():
     ''')
     con.commit()
 
+
 def createPostsDb():
     con = sql.connect('posts.db')
     cur = con.cursor()
@@ -35,9 +36,6 @@ def createPostsDb():
 createUsersDb()
 createPostsDb()
 
-name = None
-psw = None
-
 
 @app.route('/', methods=['POST', 'GET'])
 @app.route('/index', methods=['POST', 'GET'])
@@ -48,7 +46,11 @@ def index():
     avatarPaths = cur.execute('''SELECT avatarPath FROM users''').fetchall()
     countOfPosts = cur.execute('''SELECT countOfPosts FROM users''').fetchall()
 
-    return render_template('index.html', usernames=usernames, avatarPaths=avatarPaths, countOfPosts=countOfPosts, usersCount=len(usernames))
+    return render_template('index.html',
+                           usernames=usernames,
+                           avatarPaths=avatarPaths,
+                           countOfPosts=countOfPosts,
+                           usersCount=len(usernames))
 
 
 @app.route('/about', methods=['POST', 'GET'])
@@ -71,7 +73,9 @@ def reg():
 
                 con = sql.connect('users.db')
                 cur = con.cursor()
-                cur.execute(f'''INSERT INTO users (name, psw, avatarPath, countOfPosts) VALUES ("{name}", "{psw}", "NONE.jpg", 0) ''')
+                cur.execute(f'''INSERT INTO users 
+                            (name, psw, avatarPath, countOfPosts) 
+                            VALUES ("{name}", "{psw}", "NONE.jpg", 0) ''')
                 con.commit()
                 session['userLogged'] = request.form['name']
                 return redirect(url_for('acc', name=session['userLogged']))
@@ -104,7 +108,9 @@ def acc(name):
             # get images from GitHub account
             response = requests.get(request.form['git-url'])
             soup = BeautifulSoup(response.text, 'lxml')
-            url = str(soup.find('img', {'class': 'rounded-2 avatar-user'})).split('src="')[1].split('"')[0].split('?s=')[0]
+            url = str(soup.find(
+                'img', {'class': 'rounded-2 avatar-user'})
+                ).split('src="')[1].split('"')[0].split('?s=')[0]
             resp = requests.get(url)
             out = open(f"static/media/avatars/{name}.jpg", "wb")
             out.write(resp.content)
@@ -120,7 +126,7 @@ def acc(name):
 
             return render_template('acc.html', name=name, avatarPath=avatarPath, countOfPosts=countOfPosts)
 
-        except:
+        except ValueError:
             # flash about unfounded GitHub account
             flash("Such GitHub account doesn't exists")
 
@@ -187,6 +193,7 @@ def addPost(name):
 
     return render_template('add-post.html')
 
+
 @app.route('/<name>/posts')
 def posts(name):
     if checkUserExistence(name=name):
@@ -203,10 +210,17 @@ def posts(name):
             postsCount = len(contents)
             print(postsCount)
 
-            if 'userLogged' in session: username = session['userLogged']
-            else: username = None
+            if 'userLogged' in session:
+                username = session['userLogged']
+            else:
+                username = None
 
-            return render_template('posts.html', name=name, avatarPath=avatarPath, titles=titles, contents=contents, postsCount=postsCount, username=username)
+            return render_template('posts.html',
+                                   name=name,
+                                   avatarPath=avatarPath,
+                                   titles=titles, contents=contents,
+                                   postsCount=postsCount,
+                                   username=username)
         else:
             return redirect(url_for('postsNotFound', name=name))
     else:
@@ -230,6 +244,8 @@ def profile(name):
 @app.route('/error:user-not-found')
 def userNotFound():
     return render_template('userNotFound.html')
+
+
 @app.route('/<name>/posts-not-found')
 def postsNotFound(name):
     return render_template('postsNotFound.html', name=name)
@@ -268,6 +284,7 @@ def checkUserExistence(name):
             checker = False
     return checker
 
+
 def checkPostsExistence(name):
     con = sql.connect('posts.db')
     cur = con.cursor()
@@ -280,6 +297,7 @@ def checkPostsExistence(name):
         else:
             checker = False
     return checker
+
 
 def checkPostExistence(name, title):
     con = sql.connect('posts.db')
@@ -300,11 +318,11 @@ def checkAuth(name, psw):
     con = sql.connect('users.db')
     cur = con.cursor()
 
-    checker = False
     if cur.execute(f'''SELECT psw FROM users WHERE name = "{name}"''').fetchall()[0][0] == psw:
         return True
     else:
         return False
+
 
 @app.route('/deletepost/<name>:<title>')
 def deletepost(name, title):
@@ -325,7 +343,8 @@ def deletepost(name, title):
 
                     con = sql.connect('users.db')
                     cur = con.cursor()
-                    countOfPosts = cur.execute(f'''SELECT countOfPosts FROM users WHERE name = "{name}"''').fetchone()[0]
+                    countOfPosts = cur.execute(f'''SELECT countOfPosts FROM users 
+                        WHERE name = "{name}"''').fetchone()[0]
 
                     cur.execute(f'''UPDATE users SET countOfPosts = {countOfPosts - 1} WHERE name = "{name}"''')
                     con.commit()
