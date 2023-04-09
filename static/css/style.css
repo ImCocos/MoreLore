@@ -8,10 +8,10 @@ font-family: 'Poppins', sans-serif;
 
 
 header {
-position: fixed;
 top: 0;
 left: 0;
 width: 100%;
+height: 10%;
 padding: 10px 100px;
 padding-left: 13px;
 background: white;
@@ -55,7 +55,6 @@ transform: scaleX(1);
 
 
 .main-grid {
-margin-top: 100px;
 display: grid;
 gap: 10px 10px;
 grid-template-columns: 9fr 1fr;
